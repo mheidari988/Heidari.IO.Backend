@@ -19,6 +19,17 @@ public static class WebApplicationBuilderExtensions
 {
     public static WebApplicationBuilder ConfigureApplicationBuilder(this WebApplicationBuilder builder)
     {
+        #region CORS
+
+        // Add CORS policy for all origins, all methods and all headers if the environment is Development
+        _ = builder.Services.AddCors(options =>
+                options.AddPolicy("AllowAll", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()));
+
+        #endregion
+
         #region Logging
 
         _ = builder.Host.UseSerilog((hostContext, loggerConfiguration) =>
