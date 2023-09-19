@@ -5,7 +5,7 @@
     <RootNamespace>backend.$(AssemblyName)</RootNamespace>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Authors>Reza Heidari</Authors>
-    <Copyright>Reza Heidari @ 2021</Copyright>
+    <Copyright>Reza Heidari @ 2023</Copyright>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -19,6 +19,9 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
     <UserSecretsId>4fe78e8b-fefc-4da7-b3f3-babf12ad4c7f</UserSecretsId>
     <DockerfileContext>..\..</DockerfileContext>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion>1.0.0.4</FileVersion>
+    <InformationalVersion>1.0.0.4-beta</InformationalVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'backend' " />
