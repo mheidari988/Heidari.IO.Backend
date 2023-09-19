@@ -10,6 +10,11 @@ public static class WebApplicationExtensions
 {
     public static WebApplication ConfigureApplication(this WebApplication app)
     {
+        #region CORS
+        // Use CORS policy based on the environment
+        _ = app.UseCors("AllowAll");
+        #endregion
+
         #region Exceptions
 
         //_ = app.UseGlobalExceptionHandler();
