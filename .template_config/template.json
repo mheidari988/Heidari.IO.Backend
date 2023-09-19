@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Reza Heidari",
+  "classifications": [
+    "Clean Architecture",
+    "Clean",
+    "Minimal API",
+    "Minimal",
+    "API",
+    "Dotnet",
+    "Docker"
+  ],
+  "identity": "backend.Template",
+  "name": "Clean Minimal API Template",
+  "shortName": "backend",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "backend",
+  "preferNameDirectory": true,
+  "symbols": {
+    "author": {
+      "type": "parameter",
+      "displayName": "The name of the author of the solution.",
+      "defaultValue": "Reza Heidari",
+      "replaces": "Reza Heidari"
+    }
+  }
+}
