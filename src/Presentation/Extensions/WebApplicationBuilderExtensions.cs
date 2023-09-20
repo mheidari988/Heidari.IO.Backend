@@ -71,20 +71,20 @@ public static class WebApplicationBuilderExtensions
                 new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = $"backend API - {ti.ToTitleCase(builder.Environment.EnvironmentName)}",
-                    Description = "An example to share an implementation of Minimal API in .NET 6.",
+                    Title = $"www.heidari.io backend API - {ti.ToTitleCase(builder.Environment.EnvironmentName)}",
+                    Description = "API endpoints that we will use in the www.heidari.io frontend project.",
                     Contact = new OpenApiContact
                     {
-                        Name = "backend API",
-                        Email = "backend@stphnwlsh.dev",
-                        Url = new Uri("https://github.com/stphnwlsh/backend")
+                        Name = "heidari.io backend API",
+                        Email = "reza@heidari.io",
+                        Url = new Uri("https://github.com/mheidari988/Heidari.IO.Backend")
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "backend API - License - MIT",
+                        Name = "heidari.io backend API - License - MIT",
                         Url = new Uri("https://opensource.org/licenses/MIT")
                     },
-                    TermsOfService = new Uri("https://github.com/stphnwlsh/backend")
+                    TermsOfService = new Uri("https://github.com/mheidari988/Heidari.IO.Backend")
                 });
 
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
