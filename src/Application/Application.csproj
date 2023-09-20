@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Movies\Queries" />
+    <Folder Include="Portfolios\Commands\" />
   </ItemGroup>
 
 </Project>
