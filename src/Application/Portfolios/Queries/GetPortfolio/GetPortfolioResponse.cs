@@ -1,8 +1,9 @@
 namespace backend.Application.Portfolios.Queries.GetPortfolio;
 
+using backend.Application.Common.Entities;
 using backend.Application.Portfolios.Queries.GetPortfolio.Dtos;
 
-public class GetPortfolioResponse
+public record GetPortfolioResponse : Entity
 {
     public string Name { get; set; }
     public string Title { get; set; }

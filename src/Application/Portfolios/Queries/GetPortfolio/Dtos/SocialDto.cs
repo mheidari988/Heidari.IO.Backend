@@ -1,5 +1,8 @@
 namespace backend.Application.Portfolios.Queries.GetPortfolio.Dtos;
-public class SocialDto
+
+using backend.Application.Common.Entities;
+
+public record SocialDto : Entity
 {
     public string Title { get; set; }
     public string Icon { get; set; }
