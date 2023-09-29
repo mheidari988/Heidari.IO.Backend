@@ -3,7 +3,7 @@ namespace backend.Infrastructure.Databases.WebContents;
 using backend.Infrastructure.Databases.WebContents.Models;
 using Microsoft.EntityFrameworkCore;
 
-internal class WebContentsDbContext : DbContext
+public class WebContentsDbContext : DbContext
 {
     public WebContentsDbContext(DbContextOptions<WebContentsDbContext> options) : base(options)
     {
@@ -17,13 +17,21 @@ internal class WebContentsDbContext : DbContext
     public DbSet<Link> Links { get; set; }
     public DbSet<Experience> Experiences { get; set; }
     public DbSet<Skill> Skills { get; set; }
-    public DbSet<ExperienceSkill> ExperienceSkills { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        _ = modelBuilder.ApplyConfigurationsFromAssembly(typeof(WebContentsDbContext).Assembly);
+        _ = modelBuilder.Entity<Portfolio>(portfolio =>
+        {
+            _ = portfolio.OwnsMany(p => p.Menus);
+            _ = portfolio.OwnsMany(p => p.Socials);
+            _ = portfolio.OwnsMany(p => p.Experiences, e =>
+            {
+                _ = e.OwnsMany(e => e.Skills);
+                _ = e.OwnsMany(e => e.Links);
+            });
+        });
     }
 }

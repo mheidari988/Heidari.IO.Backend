@@ -8,7 +8,7 @@ using backend.Infrastructure.Databases.WebContents.Extensions;
 using Microsoft.EntityFrameworkCore;
 using SimpleDateTimeProvider;
 
-internal class PortfoliosRepository : IPortfoliosRepository
+public class PortfoliosRepository : IPortfoliosRepository
 {
     private readonly WebContentsDbContext context;
     private readonly IDateTimeProvider dateTimeProvider;
@@ -20,10 +20,8 @@ internal class PortfoliosRepository : IPortfoliosRepository
         this.dateTimeProvider = dateTimeProvider;
         this.mapper = mapper;
 
-        if (this.context != null)
+        if (this.context != null && this.context.Database.EnsureCreated())
         {
-            _ = this.context.Database.EnsureDeleted();
-            _ = this.context.Database.EnsureCreated();
             _ = this.context.AddData();
         }
     }
@@ -33,6 +31,10 @@ internal class PortfoliosRepository : IPortfoliosRepository
         var result = await this.context.Portfolios
             .Include(p => p.Menus)
             .Include(p => p.Socials)
+            .Include(p => p.Experiences)
+                .ThenInclude(e => e.Skills)
+            .Include(p => p.Experiences)
+                .ThenInclude(e => e.Links)
             .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
 

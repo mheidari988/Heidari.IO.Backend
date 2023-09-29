@@ -27,7 +27,6 @@ public static class WebApplicationBuilderExtensions
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()));
-
         #endregion
 
         #region Logging
@@ -104,7 +103,7 @@ public static class WebApplicationBuilderExtensions
 
         #region Project Dependencies
 
-        _ = builder.Services.AddInfrastructure();
+        _ = builder.Services.AddInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);
         _ = builder.Services.AddApplication();
 
         #endregion Project Dependencies

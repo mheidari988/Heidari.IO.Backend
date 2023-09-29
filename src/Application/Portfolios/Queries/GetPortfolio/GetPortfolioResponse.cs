@@ -11,4 +11,5 @@ public record GetPortfolioResponse : Entity
     public string Description { get; set; }
     public List<MenuDto> Menus { get; set; }
     public List<SocialDto> Socials { get; set; }
+    public List<ExperienceDto> Experiences { get; set; }
 }
