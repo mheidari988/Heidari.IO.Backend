@@ -7,7 +7,7 @@ public static class PortfoliosEndpoints
 {
     public static WebApplication MapPortfoliosEndpoints(this WebApplication app)
     {
-        var root = app.MapGroup("portfolio")
+        var root = app.MapGroup("/api/portfolio")
             .WithTags("portfolio")
             .WithOpenApi();
 
