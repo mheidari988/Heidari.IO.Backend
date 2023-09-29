@@ -2,7 +2,7 @@ namespace backend.Infrastructure.Databases.WebContents.Models;
 using System;
 using System.Collections.Generic;
 
-internal record Experience : Entity
+public record Experience : Entity
 {
     public string Title { get; set; }
     public string Company { get; set; }
@@ -11,5 +11,5 @@ internal record Experience : Entity
     public DateTime DateStarted { get; set; }
     public DateTime? DateEnded { get; set; }
     public ICollection<Link> Links { get; set; }
-    public ICollection<ExperienceSkill> ExperienceSkills { get; set; }
+    public ICollection<Skill> Skills { get; set; }
 }
