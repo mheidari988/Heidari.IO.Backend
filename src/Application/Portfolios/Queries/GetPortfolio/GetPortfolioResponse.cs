@@ -9,7 +9,7 @@ public record GetPortfolioResponse : Entity
     public string Title { get; set; }
     public string Subtitle { get; set; }
     public string Description { get; set; }
-    public List<MenuDto> Menus { get; set; }
-    public List<SocialDto> Socials { get; set; }
-    public List<ExperienceDto> Experiences { get; set; }
+    public List<GetPortfolioMenuDto> Menus { get; set; }
+    public List<GetPortfolioSocialDto> Socials { get; set; }
+    public List<GetPortfolioExperienceDto> Experiences { get; set; }
 }

@@ -5,7 +5,7 @@ internal class SocialMappingProfile : Profile
 {
     public SocialMappingProfile()
     {
-        _ = this.CreateMap<Models.Social, Application.Portfolios.Queries.GetPortfolio.Dtos.SocialDto>()
+        _ = this.CreateMap<Models.Social, Application.Portfolios.Queries.GetPortfolio.Dtos.GetPortfolioSocialDto>()
             .ReverseMap();
     }
 }
