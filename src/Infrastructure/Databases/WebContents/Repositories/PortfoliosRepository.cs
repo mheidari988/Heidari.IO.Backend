@@ -23,7 +23,7 @@ public class PortfoliosRepository : IPortfoliosRepository
         this.mapper = mapper;
 
         // WARNING: Only if you need to refresh the database
-        // _ = this.context.Database.EnsureDeleted();
+        //_ = this.context.Database.EnsureDeleted();
 
         if (this.context != null && this.context.Database.EnsureCreated())
         {
