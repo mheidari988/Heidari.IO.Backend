@@ -25,8 +25,7 @@ internal static class WebContentsDbContextExtensions
             new Menu
             {
                 Title = "Download CV",
-                Url = "/cv",
-                IsExternal = false,
+                Url = "https://heidaristorage.blob.core.windows.net/heidari-io-container/Resume.pdf",
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
             }
