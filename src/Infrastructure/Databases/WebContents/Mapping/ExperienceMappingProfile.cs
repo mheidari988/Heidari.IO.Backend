@@ -5,6 +5,7 @@ public class ExperienceMappingProfile : Profile
 {
     public ExperienceMappingProfile()
     {
-        _ = this.CreateMap<Models.Experience, Application.Portfolios.Queries.GetPortfolio.Dtos.ExperienceDto>().ReverseMap();
+        _ = this.CreateMap<Models.Experience, Application.Portfolios.Queries.GetPortfolio.Dtos.GetPortfolioExperienceDto>().ReverseMap();
+        _ = this.CreateMap<Models.Experience, Application.Portfolios.Queries.GetExperiences.GetExperiencesResponse>().ReverseMap();
     }
 }
