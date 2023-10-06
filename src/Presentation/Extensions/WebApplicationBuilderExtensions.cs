@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
 using Application;
 using FluentValidation;
 using Infrastructure;
@@ -19,6 +20,23 @@ public static class WebApplicationBuilderExtensions
 {
     public static WebApplicationBuilder ConfigureApplicationBuilder(this WebApplicationBuilder builder)
     {
+        #region Rate Limiting
+
+        // Add rate limiting for all requests.
+        _ = builder.Services.AddRateLimiter(options =>
+                options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+                RateLimitPartition.GetFixedWindowLimiter(
+                    partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+                    factory: partition => new FixedWindowRateLimiterOptions
+                    {
+                        AutoReplenishment = true,
+                        PermitLimit = 60,
+                        QueueLimit = 30,
+                        Window = TimeSpan.FromMinutes(1)
+                    })));
+
+        #endregion
+
         #region CORS
 
         // Add CORS policy for all origins, all methods and all headers if the environment is Development
