@@ -10,6 +10,10 @@ public static class WebApplicationExtensions
 {
     public static WebApplication ConfigureApplication(this WebApplication app)
     {
+        #region Rate Limiting
+        _ = app.UseRateLimiter();
+        #endregion
+
         #region CORS
         // Use CORS policy based on the environment
         _ = app.UseCors("AllowAll");
