@@ -122,7 +122,7 @@ public static class WebApplicationBuilderExtensions
         #region Project Dependencies
 
         _ = builder.Services.AddInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);
-        _ = builder.Services.AddApplication();
+        _ = builder.Services.AddApplication(builder.Configuration);
 
         #endregion Project Dependencies
 
