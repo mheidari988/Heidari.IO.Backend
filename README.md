@@ -1,6 +1,6 @@
 # Heidari.IO.Backend
 
-Backend project of the www.heidari.io website
+Backend project of the https://heidari.io website
 
 ## Configuration of the DbContext
 
