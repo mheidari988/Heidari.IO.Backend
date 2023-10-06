@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
 using Application;
 using FluentValidation;
 using Infrastructure;
@@ -19,6 +20,23 @@ public static class WebApplicationBuilderExtensions
 {
     public static WebApplicationBuilder ConfigureApplicationBuilder(this WebApplicationBuilder builder)
     {
+        #region Rate Limiting
+
+        // Add rate limiting for all requests.
+        _ = builder.Services.AddRateLimiter(options =>
+                options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+                RateLimitPartition.GetFixedWindowLimiter(
+                    partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
+                    factory: partition => new FixedWindowRateLimiterOptions
+                    {
+                        AutoReplenishment = true,
+                        PermitLimit = 60,
+                        QueueLimit = 30,
+                        Window = TimeSpan.FromMinutes(1)
+                    })));
+
+        #endregion
+
         #region CORS
 
         // Add CORS policy for all origins, all methods and all headers if the environment is Development
@@ -27,7 +45,6 @@ public static class WebApplicationBuilderExtensions
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()));
-
         #endregion
 
         #region Logging
@@ -71,20 +88,20 @@ public static class WebApplicationBuilderExtensions
                 new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = $"backend API - {ti.ToTitleCase(builder.Environment.EnvironmentName)}",
-                    Description = "An example to share an implementation of Minimal API in .NET 6.",
+                    Title = $"www.heidari.io backend API - {ti.ToTitleCase(builder.Environment.EnvironmentName)}",
+                    Description = "API endpoints that we will use in the www.heidari.io frontend project.",
                     Contact = new OpenApiContact
                     {
-                        Name = "backend API",
-                        Email = "backend@stphnwlsh.dev",
-                        Url = new Uri("https://github.com/stphnwlsh/backend")
+                        Name = "heidari.io backend API",
+                        Email = "reza@heidari.io",
+                        Url = new Uri("https://github.com/mheidari988/Heidari.IO.Backend")
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "backend API - License - MIT",
+                        Name = "heidari.io backend API - License - MIT",
                         Url = new Uri("https://opensource.org/licenses/MIT")
                     },
-                    TermsOfService = new Uri("https://github.com/stphnwlsh/backend")
+                    TermsOfService = new Uri("https://github.com/mheidari988/Heidari.IO.Backend")
                 });
 
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -104,7 +121,7 @@ public static class WebApplicationBuilderExtensions
 
         #region Project Dependencies
 
-        _ = builder.Services.AddInfrastructure();
+        _ = builder.Services.AddInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);
         _ = builder.Services.AddApplication();
 
         #endregion Project Dependencies
