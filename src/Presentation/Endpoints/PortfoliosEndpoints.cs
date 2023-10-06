@@ -1,6 +1,8 @@
 namespace backend.Presentation.Endpoints;
 
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using backend.Application.Portfolios.Commands.VerifyAndDownloadCv;
 using backend.Application.Portfolios.Queries.GetExperiences;
 using backend.Application.Portfolios.Queries.GetPortfolio;
 using MediatR;
@@ -24,6 +26,11 @@ public static class PortfoliosEndpoints
             .ProducesProblem(StatusCodes.Status500InternalServerError)
             .WithSummary("Lookup the experiences by Portfolio id")
             .WithDescription("\n    GET /portfolio/{id}/experiences");
+
+        _ = root.MapPost("/download-file", VerifyAndDownloadCv)
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
+            .WithSummary("Verify code and download file")
+            .WithDescription("\n    POST /portfolio/download-file");
 
         return app;
     }
@@ -49,6 +56,24 @@ public static class PortfoliosEndpoints
             {
                 PortfolioId = id
             }));
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return Results.Problem(ex.StackTrace, ex.Message, StatusCodes.Status500InternalServerError);
+        }
+    }
+
+    public static async Task<IResult> VerifyAndDownloadCv(VerifyAndDownloadCvCommand command, IMediator mediator)
+    {
+        try
+        {
+            var response = await mediator.Send(command);
+            return Results.File(response.CvFileStream, response.CvFileMimeType, response.CvFileName);
+        }
+        catch (ValidationException)
+        {
+            return Results.BadRequest("Invalid code.");
         }
         catch (Exception ex)
         {

@@ -30,7 +30,7 @@ public static class DependencyInjection
         _ = services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
 
 
-        //// WebContents
+        // WebContents
 
         var cosmosDbSettings = configuration.GetSection("Cosmos");
         var accountEndpoint = cosmosDbSettings["AccountEndpoint"];
