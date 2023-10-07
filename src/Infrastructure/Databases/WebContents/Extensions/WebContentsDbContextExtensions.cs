@@ -12,8 +12,8 @@ internal static class WebContentsDbContextExtensions
             Id = Guid.NewGuid(),
             Name = "Reza Heidari",
             Title = "Full Stack Software Developer",
-            Subtitle = "From Figma to deployment, I can build web applications, and I'm also proficient in crafting Windows and WPF apps.",
-            Description = "<p>In 2012, I embarked on a journey into the world of coding and software development by experimenting with both Web and Windows Applications. Since then, I've had the opportunity to develop software for various fields, including fields like <a href=\"#\">healthcare</a>, <a href=\"#\">insurance</a>, academic collaborations, <a href=\"#\">small startups</a>, and <a href=\"#\">wonderful corporations</a>, working with a wide array of individual developers.</p><p>These days, I create user-friendly applications and online experiences. My work starts with gathering information and planning. I take care of both the behind-the-scenes part (backend) of the application, including managing databases, and the visual part (frontend), leveraging wide range of tools. When everything's ready, I use various methods, including Docker and cloud services, or in some cases, traditional ways of deployment, to put the application live for users.</p><p>Away from the keyboard, I find joy in walking with my favorite tunes, spending cherished moments with my wife and our amusing cat, or spending time around <a href=\"https://www.itu.edu.tr/en\" target=\"_blank\">Istanbul Technical University</a>.</p>",
+            Subtitle = "As a dedicated web developer with a strong emphasis on backend technologies, I possess the expertise to craft comprehensive web applications from backend to frontend, ensuring seamless integration. Additionally, I have proficiency in creating Windows and WPF applications.",
+            Description = "<p>In 2012, my coding adventure began with Web and Windows apps. Since then, I've crafted software for diverse sectors like advertisement, textile industry, healthcare, insurance, small startups, and sizable corporations, alongside brilliant minds.</p><p> Now, I build intuitive applications from idea to launch, handling both the technical backend and the aesthetic frontend with a toolbox full of modern tech. Once polished, I deploy them using platforms like Docker and Azure cloud services, or traditional on-premises servers, bringing our digital solutions to life.</p><p> Off the screen, I savor serene walks tuned to music, cherish moments with my loved ones, and enjoy the intellectual buzz around Istanbul Technical University.</p>",
             DateCreated = DateTime.UtcNow,
             DateModified = DateTime.UtcNow,
         };
@@ -24,8 +24,17 @@ internal static class WebContentsDbContextExtensions
         {
             new Menu
             {
-                Title = "Download CV",
-                Url = "https://heidaristorage.blob.core.windows.net/heidari-io-container/Resume.pdf",
+                Title = "Home",
+                Url = "",
+                Slug = "/",
+                DateCreated = DateTime.UtcNow,
+                DateModified = DateTime.UtcNow,
+            },
+            new Menu
+            {
+                Title = "Contact me",
+                Url = "",
+                Slug = "/contact",
                 DateCreated = DateTime.UtcNow,
                 DateModified = DateTime.UtcNow,
             }

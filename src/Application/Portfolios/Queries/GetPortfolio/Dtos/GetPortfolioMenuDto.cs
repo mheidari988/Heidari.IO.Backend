@@ -6,4 +6,5 @@ public record GetPortfolioMenuDto : Entity
 {
     public string Title { get; set; }
     public string Url { get; set; }
+    public string Slug { get; set; }
 }

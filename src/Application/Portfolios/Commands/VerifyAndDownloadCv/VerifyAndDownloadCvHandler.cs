@@ -20,7 +20,7 @@ public class VerifyAndDownloadCvHandler : IRequestHandler<VerifyAndDownloadCvCom
         var downloadUrl = "/heidari-io-container/Resume.pdf";
 
         // TODO: Move to Db and confirm the code is valid
-        var secretCode = "123";
+        var secretCode = "qwe123";
 
         if (request.SecretCode != secretCode)
         {
