@@ -6,6 +6,8 @@ using backend.Application.Portfolios.Commands.ContactMe;
 using backend.Application.Portfolios.Commands.VerifyAndDownloadCv;
 using backend.Application.Portfolios.Queries.GetExperiences;
 using backend.Application.Portfolios.Queries.GetPortfolio;
+using backend.Presentation.Validators;
+using FluentValidation;
 using MediatR;
 
 public static class PortfoliosEndpoints
@@ -78,7 +80,7 @@ public static class PortfoliosEndpoints
             var response = await mediator.Send(command);
             return Results.File(response.CvFileStream, response.CvFileMimeType, response.CvFileName);
         }
-        catch (ValidationException)
+        catch (System.ComponentModel.DataAnnotations.ValidationException)
         {
             return Results.BadRequest("Invalid code.");
         }
@@ -93,6 +95,13 @@ public static class PortfoliosEndpoints
     {
         try
         {
+            var validator = new ContactMeValidator();
+            var validationResult = await validator.ValidateAsync(command);
+            if (!validationResult.IsValid)
+            {
+                return Results.BadRequest(validationResult.Errors);
+            }
+
             var response = await mediator.Send(command);
             return Results.Ok(response);
         }
