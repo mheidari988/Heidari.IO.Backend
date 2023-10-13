@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="Movies\Queries" />
-    <Folder Include="Portfolios\Commands\" />
   </ItemGroup>
 
 </Project>
