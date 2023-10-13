@@ -1,9 +1,11 @@
 namespace backend.Infrastructure.Databases.WebContents.Repositories;
 
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using backend.Application.Portfolios;
+using backend.Application.Portfolios.Commands.ContactMe;
 using backend.Application.Portfolios.Queries.GetExperiences;
 using backend.Application.Portfolios.Queries.GetPortfolio;
 using backend.Infrastructure.Databases.WebContents.Extensions;
@@ -49,7 +51,7 @@ public class PortfoliosRepository : IPortfoliosRepository
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            Debug.WriteLine(ex);
             throw;
         }
     }
@@ -83,7 +85,31 @@ public class PortfoliosRepository : IPortfoliosRepository
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            Debug.WriteLine(ex);
+            throw;
+        }
+    }
+
+    public async Task<ContactMeResponse> SaveContactMe(ContactMeCommand request, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _ = await this.context.ContactMes.AddAsync(new Models.ContactMe
+            {
+                FullName = request.FullName,
+                Email = request.Email,
+                Message = request.Message,
+                Subject = request.Subject,
+                DateCreated = this.dateTimeProvider.Now
+            }, cancellationToken);
+
+            var result = await this.context.SaveChangesAsync(cancellationToken);
+
+            return new ContactMeResponse(Success: result > 0);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
             throw;
         }
     }

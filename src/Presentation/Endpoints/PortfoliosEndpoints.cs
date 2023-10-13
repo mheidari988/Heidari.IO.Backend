@@ -2,6 +2,7 @@ namespace backend.Presentation.Endpoints;
 
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using backend.Application.Portfolios.Commands.ContactMe;
 using backend.Application.Portfolios.Commands.VerifyAndDownloadCv;
 using backend.Application.Portfolios.Queries.GetExperiences;
 using backend.Application.Portfolios.Queries.GetPortfolio;
@@ -31,6 +32,12 @@ public static class PortfoliosEndpoints
             .ProducesProblem(StatusCodes.Status500InternalServerError)
             .WithSummary("Verify code and download file")
             .WithDescription("\n    POST /portfolio/download-file");
+
+        _ = root.MapPost("/contact", ContactMe)
+            .Produces<ContactMeResponse>()
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
+            .WithSummary("Contact us form")
+            .WithDescription("\n    POST /portfolio/contact");
 
         return app;
     }
@@ -74,6 +81,20 @@ public static class PortfoliosEndpoints
         catch (ValidationException)
         {
             return Results.BadRequest("Invalid code.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return Results.Problem(ex.StackTrace, ex.Message, StatusCodes.Status500InternalServerError);
+        }
+    }
+
+    public static async Task<IResult> ContactMe(ContactMeCommand command, IMediator mediator)
+    {
+        try
+        {
+            var response = await mediator.Send(command);
+            return Results.Ok(response);
         }
         catch (Exception ex)
         {
