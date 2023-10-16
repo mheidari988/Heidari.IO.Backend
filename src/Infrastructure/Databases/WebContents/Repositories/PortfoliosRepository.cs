@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using backend.Application.Common.Exceptions;
 using backend.Application.Portfolios;
 using backend.Application.Portfolios.Commands.ContactMe;
 using backend.Application.Portfolios.Queries.GetExperiences;
 using backend.Application.Portfolios.Queries.GetPortfolio;
 using backend.Infrastructure.Databases.WebContents.Extensions;
+using backend.Infrastructure.Databases.WebContents.Models;
 using Microsoft.EntityFrameworkCore;
 using SimpleDateTimeProvider;
 
@@ -45,7 +47,7 @@ public class PortfoliosRepository : IPortfoliosRepository
                 .Include(p => p.Experiences)
                     .ThenInclude(e => e.Links)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(cancellationToken);
+                .FirstOrDefaultAsync(cancellationToken) ?? throw new NotFoundException($"{nameof(Portfolio)} not found");
 
             return this.mapper.Map<GetPortfolioResponse>(result);
         }
@@ -56,7 +58,7 @@ public class PortfoliosRepository : IPortfoliosRepository
         }
     }
 
-    public async Task<List<GetExperiencesResponse>> GetExperiences(GetExperiencesQuery requestQuery, CancellationToken cancellationToken = default)
+    public async Task<List<GetExperiencesResponse>> GetExperiencesAsync(GetExperiencesQuery requestQuery, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -67,12 +69,7 @@ public class PortfoliosRepository : IPortfoliosRepository
                 .Include(e => e.Experiences)
                     .ThenInclude(e => e.Links)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(cancellationToken);
-
-            if (portfolio == null)
-            {
-                return null;
-            }
+                .FirstOrDefaultAsync(cancellationToken) ?? throw new NotFoundException("Portfolio not found");
 
             var experiences = portfolio.Experiences
                 .Where(e => string.IsNullOrEmpty(requestQuery.SearchTerm) ||
@@ -94,7 +91,7 @@ public class PortfoliosRepository : IPortfoliosRepository
     {
         try
         {
-            _ = await this.context.ContactMes.AddAsync(new Models.ContactMe
+            _ = await this.context.ContactMes.AddAsync(new ContactMe
             {
                 FullName = request.FullName,
                 Email = request.Email,
