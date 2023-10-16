@@ -14,6 +14,6 @@ public class GetExperiencesHandler : IRequestHandler<GetExperiencesQuery, List<G
 
     public Task<List<GetExperiencesResponse>> Handle(GetExperiencesQuery request, CancellationToken cancellationToken)
     {
-        return this.portfoliosRepository.GetExperiences(request, cancellationToken);
+        return this.portfoliosRepository.GetExperiencesAsync(request, cancellationToken);
     }
 }

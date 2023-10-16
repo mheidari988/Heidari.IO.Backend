@@ -1,13 +1,11 @@
 namespace backend.Presentation.Endpoints;
 
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using backend.Application.Portfolios.Commands.ContactMe;
 using backend.Application.Portfolios.Commands.VerifyAndDownloadCv;
 using backend.Application.Portfolios.Queries.GetExperiences;
 using backend.Application.Portfolios.Queries.GetPortfolio;
 using backend.Presentation.Validators;
-using FluentValidation;
 using MediatR;
 
 public static class PortfoliosEndpoints
