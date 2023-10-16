@@ -49,6 +49,17 @@ public class PortfoliosRepository : IPortfoliosRepository
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken) ?? throw new NotFoundException($"{nameof(Portfolio)} not found");
 
+            // Since EFCore Does not suppurt filtering on Include for the CosmosDb, we need to filter manually
+            result.Menus = result.Menus?.Where(m => m.IsActive).ToList();
+            result.Socials = result.Socials?.Where(s => s.IsActive).ToList();
+            result.Experiences = result.Experiences?.Where(e => e.IsActive).ToList();
+
+            foreach (var experience in result.Experiences)
+            {
+                experience.Skills = experience.Skills?.Where(s => s.IsActive).ToList();
+                experience.Links = experience.Links?.Where(l => l.IsActive).ToList();
+            }
+
             return this.mapper.Map<GetPortfolioResponse>(result);
         }
         catch (Exception ex)

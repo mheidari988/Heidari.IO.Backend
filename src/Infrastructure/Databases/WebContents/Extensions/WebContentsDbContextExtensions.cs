@@ -32,6 +32,15 @@ internal static class WebContentsDbContextExtensions
             },
             new Menu
             {
+                Title = "Open Source",
+                Url = "",
+                Slug = "/opensource",
+                DateCreated = DateTime.UtcNow,
+                DateModified = DateTime.UtcNow,
+                IsActive = false
+            },
+            new Menu
+            {
                 Title = "Contact me",
                 Url = "",
                 Slug = "/contact",
