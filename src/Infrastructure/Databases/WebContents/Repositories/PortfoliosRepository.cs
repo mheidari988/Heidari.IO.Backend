@@ -27,7 +27,7 @@ public class PortfoliosRepository : IPortfoliosRepository
         this.mapper = mapper;
 
         // WARNING: Only if you need to refresh the database
-        //_ = this.context.Database.EnsureDeleted();
+        _ = this.context.Database.EnsureDeleted();
 
         if (this.context != null && this.context.Database.EnsureCreated())
         {
@@ -53,12 +53,13 @@ public class PortfoliosRepository : IPortfoliosRepository
             result.Menus = result.Menus?.Where(m => m.IsActive).ToList();
             result.Socials = result.Socials?.Where(s => s.IsActive).ToList();
             result.Experiences = result.Experiences?.Where(e => e.IsActive).ToList();
-
             foreach (var experience in result.Experiences)
             {
                 experience.Skills = experience.Skills?.Where(s => s.IsActive).ToList();
                 experience.Links = experience.Links?.Where(l => l.IsActive).ToList();
             }
+
+            result.Gpts.GptModels = result.Gpts.GptModels?.Where(g => g.IsActive).ToList();
 
             return this.mapper.Map<GetPortfolioResponse>(result);
         }

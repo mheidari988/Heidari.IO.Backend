@@ -32,6 +32,15 @@ internal static class WebContentsDbContextExtensions
             },
             new Menu
             {
+                Title = "GPTs AI Models",
+                Url = "",
+                Slug = "/gpts",
+                DateCreated = DateTime.UtcNow,
+                DateModified = DateTime.UtcNow,
+                IsActive = true
+            },
+            new Menu
+            {
                 Title = "Open Source",
                 Url = "",
                 Slug = "/opensource",
@@ -242,6 +251,45 @@ internal static class WebContentsDbContextExtensions
             }
         };
         portfolio.Experiences = experiences;
+        #endregion
+
+        #region Add GPTs
+        var gpts = new Gpts
+        {
+            Description = "<div className=\"content-inner\"> <h1>My GPTs</h1> <p> <a href=\"https://openai.com/blog/introducing-gpts\">GPTs</a>, are custom versions of ChatGPT that combine instructions, extra knowledge, and any combination of skills. </p> <p> Here are all the models I've crafted using <a href=\"https://openai.com/blog/new-models-and-developer-products-announced-at-devday\"> ChatGPT 4 Turbo </a> , which you can readily incorporate into your daily activities and tasks as a dedicated software developer. </p> </div>",
+            GptModels = new List<GptModel>()
+            {
+                new GptModel
+                {
+                    Title = "SQL Mojito",
+                    Description = "A T-SQL mentor creating learning scenarios.",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/sql-mojito.png",
+                    Url = "https://chat.openai.com/g/g-EKC4WpKm6-sql-mojito",
+                },
+                new GptModel
+                {
+                    Title = "DS Mojito",
+                    Description = "Mentor for interactive data structure learning.",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/ds-mojito.png",
+                    Url = "https://chat.openai.com/g/g-dnYIR4cb1-ds-mojito",
+                },
+                new GptModel
+                {
+                    Title = "CSS Mojito",
+                    Description = "A virtual CSS mentor that guides and validates.",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/css-mojito.png",
+                    Url = "https://chat.openai.com/g/g-ttqppO8aQ-css-mojito",
+                },
+                new GptModel
+                {
+                    Title = "Bing It",
+                    Description = "I search Bing to find answers.",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/bing-it.png",
+                    Url = "https://chat.openai.com/g/g-7MfR8Jqvs-bing-it",
+                },
+            }
+        };
+        portfolio.Gpts = gpts;
         #endregion
 
         _ = context.Add(portfolio);

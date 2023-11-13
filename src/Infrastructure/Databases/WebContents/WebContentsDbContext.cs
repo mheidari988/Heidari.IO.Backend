@@ -16,6 +16,8 @@ public class WebContentsDbContext : DbContext
     public DbSet<Social> Socials { get; set; }
     public DbSet<Link> Links { get; set; }
     public DbSet<Experience> Experiences { get; set; }
+    public DbSet<Gpts> Gpts { get; set; }
+    public DbSet<GptModel> GptModels { get; set; }
     public DbSet<Skill> Skills { get; set; }
     public DbSet<ContactMe> ContactMes { get; set; }
 
@@ -32,6 +34,7 @@ public class WebContentsDbContext : DbContext
                 _ = e.OwnsMany(e => e.Skills);
                 _ = e.OwnsMany(e => e.Links);
             });
+            _ = portfolio.OwnsOne(p => p.Gpts, g => _ = g.OwnsMany(g => g.GptModels));
         });
     }
 }

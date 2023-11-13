@@ -8,4 +8,5 @@ public record Portfolio : Entity
     public ICollection<Menu> Menus { get; set; }
     public ICollection<Social> Socials { get; set; }
     public ICollection<Experience> Experiences { get; set; }
+    public Gpts Gpts { get; set; }
 }
