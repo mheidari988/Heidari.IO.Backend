@@ -263,28 +263,28 @@ internal static class WebContentsDbContextExtensions
                 {
                     Title = "SQL Mojito",
                     Description = "A T-SQL mentor creating learning scenarios.",
-                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/sql-mojito.png",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/sql-mojito-80x80.png",
                     Url = "https://chat.openai.com/g/g-EKC4WpKm6-sql-mojito",
                 },
                 new GptModel
                 {
                     Title = "DS Mojito",
                     Description = "Mentor for interactive data structure learning.",
-                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/ds-mojito.png",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/ds-mojito-80x80.png",
                     Url = "https://chat.openai.com/g/g-dnYIR4cb1-ds-mojito",
                 },
                 new GptModel
                 {
                     Title = "CSS Mojito",
                     Description = "A virtual CSS mentor that guides and validates.",
-                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/css-mojito.png",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/css-mojito-80x80.png",
                     Url = "https://chat.openai.com/g/g-ttqppO8aQ-css-mojito",
                 },
                 new GptModel
                 {
                     Title = "Bing It",
                     Description = "I search Bing to find answers.",
-                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/bing-it.png",
+                    Icon = "https://heidaristorage.blob.core.windows.net/heidari-io-container/bing-it-80x80.png",
                     Url = "https://chat.openai.com/g/g-7MfR8Jqvs-bing-it",
                 },
             }
