@@ -32,7 +32,7 @@ internal static class WebContentsDbContextExtensions
             },
             new Menu
             {
-                Title = "GPTs AI Models",
+                Title = "My GPT Models",
                 Url = "",
                 Slug = "/gpts",
                 DateCreated = DateTime.UtcNow,
